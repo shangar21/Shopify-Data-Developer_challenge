@@ -1,10 +1,31 @@
 {% extends "header.html" %} 
 {% block content %}
+
 <center>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
     <form method=post action="/upload_images" enctype=multipart/form-data>
             <input type="file" name="files[]" multiple="true" required> 
             <input type="submit" value="Upload">    
     </form>
+    <br>
+    <form method=post action="/upload_images" enctype=multipart/form-data>
+        <input type="text" placeholder="Image URL" name="image_url" multiple="true" required> 
+        <input type="text" placeholder="File Name" name="url_image_file_name" required>
+        <select name="image_extention">\
+            {% for e in extentions %} 
+            <option value="{{ e }}">{{ e }}</option>
+            {% endfor %} 
+        </select>
+        <input type="submit" value="Upload From URL">    
+</form>
 </center>
 
 

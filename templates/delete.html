@@ -1,0 +1,28 @@
+{% extends "header.html" %} 
+{% block content %}
+<center>
+    {% if names %}
+    <form method=post action="/delete_images" enctype=multipart/form-data>
+            {% for name in names %} 
+                <input type="checkbox" id="{{ name }}" name="{{ name }}">
+                <label for="{{ name }}">{{ name }}
+                    <img src="{{ url_for('media', filename=name) }}" width=100 height=100>
+                </label><br>
+            {% endfor %} 
+            <input type="submit" value="Delete">  
+    </form>
+    <form method=post action="/delete_images">
+        <input type="submit" name="delete_all_imgs" value="Delete All">
+    </form>
+    {% else %} 
+    <div class="uk-card uk-card-primary uk-card-body">
+        <h3 class="uk-card-title">No Images Uploaded Yet!</h3>
+        <a href="/upload_images">Click here to upload images!</a>
+    </div>
+    {% endif %} 
+</center>
+
+
+
+
+{% endblock %} 

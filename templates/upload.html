@@ -11,12 +11,33 @@
     </ul>
   {% endif %}
 {% endwith %}
+</center>
+<center>
+  <h4>Current Images</h4>
+</center>
+<center>
+  {% for img in images %} 
+  <ul class="uk-list uk-list-collapse">
+      <li>{{ img.name }}</li>
+  </ul>
+  {% endfor %}
+
+<h4>Upload</h4>
     <form method=post action="/upload_images" enctype=multipart/form-data>
             <input type="file" name="files[]" multiple="true" required> 
             <input type="submit" value="Upload">    
     </form>
     <br>
-
+    <form method=post action="/upload_images" enctype="multipart/form-data">
+      <input type="text" name="img_url" placeholder="Image URL" required>
+      <input type="text" name="img_title" palceholder="Image Name" required>
+      <select name="extension">
+        {% for e in extensions %}
+          <option value="{{ e }}"> {{ e }} </option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="Upload">
+    </form>
 </center>
 
 

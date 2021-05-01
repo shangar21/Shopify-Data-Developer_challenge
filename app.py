@@ -4,6 +4,7 @@ import os
 from werkzeug.utils import secure_filename
 from models import Image
 from db import save_from_url, db_init, db
+from sqlalchemy.dialects.sqlite import insert
 
 app = Flask(__name__)
 
@@ -24,25 +25,35 @@ def index():
 @app.route('/upload_images', methods=['GET', 'POST'])
 def upload():
     global IMAGE_TYPES
-
     if request.method == 'POST':
         files = request.files.getlist("files[]")
         urls = request.form.to_dict()
-        print(urls)
         if urls:
-            img = Image(img=urls['image_url'], mimetype=urls['image_extention'], name=urls['url_image_file_name'])
+            images = Image.query.all()
+            filename = urls['img_title']+urls['extension']
+            mimetype = urls['extension']
+            req = urllib.request.Request(urls['img_url'], headers={'User-Agent': 'Mozilla/5.0'})
+            img = Image(img=urllib.request.urlopen(req).read(), mimetype=mimetype, name=filename)
             db.session.add(img)
-            db.session.commit()
-            return render_template('upload.html', extentions=IMAGE_TYPES)
-        
+            try:
+                db.session.commit()
+            except:
+                db.session.rollback()
+                flash("{} already has been uploaded".format(filename))           
+
         for f in files:
+            images = Image.query.all()
             filename = secure_filename(f.filename)
             mimetype = f.mimetype
             img = Image(img=f.read(), mimetype=mimetype, name=filename)
             db.session.add(img)
-            db.session.commit()
+            try:
+                db.session.commit()
+            except:
+                db.session.rollback()
+                flash("{} already has been uploaded".format(filename))
             
-    return render_template('upload.html', extentions=IMAGE_TYPES)
+    return render_template('upload.html', extensions=IMAGE_TYPES, images=Image.query.all())
 
 @app.route('/delete_images', methods=['GET', 'POST'])
 def delete():

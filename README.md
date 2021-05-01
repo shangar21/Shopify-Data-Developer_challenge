@@ -24,4 +24,26 @@ After running a dialogue will come up underneath as such:
 use the link that follows the "Running on" part at the end of the dialogue and app will run on browser. 
 
 ## Using the app
-The homepage will have a few dummy photos to begin with. All photos that are added will be seen on this homepage and any photos that are deleted will not be seen there. The top navbar contains 3 options, upload, delete and search. 
+The homepage will have a few dummy photos to begin with (images left after testing the delete all function (after uploading numerous images), URL upload, multiple local file upload, delete multiple). All photos that are added will be seen on this homepage. The top navbar contains 3 options, upload, delete and search. 
+
+### Upload
+
+Clicking browse lets you pick multiple files from your PC, once all have been selected and uploaded, cliking the upload button uploads the images to the database. 
+
+The next option is to add via URL. This option also requires the user to set a name for the file as well as the extension the file will use (this was placed since many images online have random numbers as the name which makes it hard to identify). This only takes one URL at a time. Clicking upload, uploads the images to the database.
+
+### Delete
+
+There are checkboxes to select multiple images at once, or if one wants to delete all images that is also an option present at the very bottom on a button labelled "Delete All". 
+
+### Search 
+
+This is a substring search. One can search via substring of the name of the image (For example, if an image is labelled dog_1.jpg, searching 'dog' will return that image). One can also search via extension and the query will return all images with said file extension. 
+
+## How it works and what it uses
+
+This app uses Flask back end and a simple HTML front end. The database used is an sqlite database with the SQLAlchemy library from flask. 
+
+## What features can be added in the future
+
+I can add a select all option so that if someone wants to delete many images without deleting all they can select all and deselect the ones they want to keep. I can add images from multiple URLs instead of one at a time. I can add search from similar image.

@@ -1,17 +1,23 @@
 {% extends "header.html" %} 
 {% block content %}
-
+{% if images %}
 <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
-    
-    {% for name in names %} 
+    {% for img in images %} 
     <div>
         <div class="uk-card uk-card-hover uk-card-body">
-            <h3 class="uk-card-title">{{ name }}</h3>
-            <img src="{{ url_for('media', filename=name) }}" width=300 height=300>
+            <h3 class="uk-card-title">{{ img.name }}</h3>
+            <img src="media/{{ img.id }}" width=300 height=300>
         </div>
     </div>
     {% endfor %}
-
 </div>
+{% else %} 
+<center>
+    <div class="uk-card uk-card-primary uk-card-body">
+        <h3 class="uk-card-title">No Images Uploaded Yet!</h3>
+        <a href="/upload_images">Click here to upload images!</a>
+    </div>
+</center>
 
+{% endif %} 
 {% endblock %} 

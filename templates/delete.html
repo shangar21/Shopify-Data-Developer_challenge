@@ -1,12 +1,12 @@
 {% extends "header.html" %} 
 {% block content %}
 <center>
-    {% if names %}
+    {% if images %}
     <form method=post action="/delete_images" enctype=multipart/form-data>
-            {% for name in names %} 
-                <input type="checkbox" id="{{ name }}" name="{{ name }}">
-                <label for="{{ name }}">{{ name }}
-                    <img src="{{ url_for('media', filename=name) }}" width=100 height=100>
+            {% for img in images %} 
+                <input type="checkbox" id="{{ img.name }}" name="{{ img.id }}">
+                <label for="{{ img.name }}">{{ img.name }}
+                    <img src="{{ url_for('media', id=img.id) }}" width=100 height=100>
                 </label><br>
             {% endfor %} 
             <input type="submit" value="Delete">  

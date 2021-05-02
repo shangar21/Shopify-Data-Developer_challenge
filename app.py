@@ -4,7 +4,6 @@ import os
 from werkzeug.utils import secure_filename
 from models import Image
 from db import save_from_url, db_init, db
-from sqlalchemy.dialects.sqlite import insert
 
 app = Flask(__name__)
 

@@ -6,6 +6,14 @@ To install requirements run:
 ```bash
 pip3 install -r requirements.txt
 ```
+If the above does not work, with a default python install the only extra packages needed are flask, flask_sqlalchemy, and werkzeug with the following:
+
+```bash
+pip3 install flask
+pip3 install flask_sqlalchemy
+pip3 instal werkzeug
+```
+
 
 ## Running the Program
 in terminal change directories into the Shopify-Data-Developer-Challenge directory and enter:

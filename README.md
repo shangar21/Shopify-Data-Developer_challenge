@@ -1,5 +1,9 @@
 # Shopify Data Developer Challenge
 
+## This app is now deployed on Heroku! Click [here](https://image-repo-dev-challenge-ssm.herokuapp.com/).
+
+App link: https://image-repo-dev-challenge-ssm.herokuapp.com/
+
 ## Installing Requirements
 To run this you will need python 3.8 along with pip. 
 To install requirements run:
